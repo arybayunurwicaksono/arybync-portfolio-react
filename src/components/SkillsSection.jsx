@@ -30,7 +30,9 @@ const categories = [
 export const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
-  const filteredSkills = skills.filter((skill) => activeCategory === 'all' || skill.category === activeCategory);
+  const filteredSkills = skills.filter(
+    (skill) => activeCategory === 'all' || skill.category === activeCategory
+  );
 
   return (
     <section id="skills" className="py-24 px-4 relative bg-secondary/30">
@@ -44,10 +46,10 @@ export const SkillsSection = () => {
             <button
               key={key}
               className={cn(
-                'px-5 py-2 rounded-full transition-colors duration-300 capitalize',
+                'cursor-pointer px-5 py-2 rounded-full transition-colors duration-300 capitalize',
                 activeCategory === category
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-background/70 text-foreground hover:bg-secondary'
+                  : 'bg-background/70 text-foreground hover:bg-secondary hover:bg-primary/70 hover:text-white'
               )}
               onClick={() => setActiveCategory(category)}
             >
