@@ -1,4 +1,4 @@
-import { ArrowUp } from "lucide-react";
+
 
 export const Footer = () => {
   return (
@@ -8,12 +8,7 @@ export const Footer = () => {
         {" "}
         &copy; {new Date().getFullYear()} Arybync. All rights reserved.
       </p>
-      <a
-        href="#home"
-        className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
-      >
-        <ArrowUp size={20} />
-      </a>
+     
     </footer>
   );
 };
