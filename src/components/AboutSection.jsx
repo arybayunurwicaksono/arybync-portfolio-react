@@ -10,8 +10,8 @@ export const AboutSection = () => {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h3 className="text-2xl font-semibold">
+          <div className="text-left space-y-6">
+            <h3 className="text-2xl font-bold">
               Passionate Mobile Developer. who loves to explore new skill and
               tech
             </h3>
@@ -35,7 +35,7 @@ export const AboutSection = () => {
               developer, and create solutions that improve people’s lives.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4">
               <a href="#contact" className="cosmic-button">
                 Get in Touch
               </a>
@@ -48,6 +48,7 @@ export const AboutSection = () => {
               </a>
             </div>
           </div>
+          {/* TODO: move it the content into variable instead hardocede */}
           <div className="grid grid-cols-1 gap-6">
             <div className="gradient-border p-6 card-hover">
               <div className="flex items-start gap-4">
@@ -58,7 +59,8 @@ export const AboutSection = () => {
                   <h4 className="font-semibold text-lg">Mobile Developer</h4>
                   <p className="text-muted-foreground">
                     Building responsive and user-friendly mobile applications
-                    using Kotlin, Java and using flutter too, recently, React Native
+                    using Kotlin, Java and using flutter too, recently, React
+                    Native
                   </p>
                 </div>
               </div>
@@ -71,8 +73,9 @@ export const AboutSection = () => {
                 <div className="text-left">
                   <h4 className="font-semibold text-lg">Personal</h4>
                   <p className="text-muted-foreground">
-                    I'm a dedicated and passionate person who loves to
-                    explore new tech and improve my skills. I loves to play guitar and reading tech blogs
+                    I'm a dedicated and passionate person who loves to explore
+                    new tech and improve my skills. I loves to play guitar and
+                    reading tech blogs
                   </p>
                 </div>
               </div>
@@ -86,7 +89,9 @@ export const AboutSection = () => {
                   <h4 className="font-semibold text-lg">Where i work?</h4>
                   <p className="text-muted-foreground">
                     I am currently working at AssistX Enterprise as a Mobile
-                    Developer, where I contribute to develop Pine VPN to Face Recognition that used on National Football Team of Indonesia match
+                    Developer, where I contribute to develop Pine VPN to Face
+                    Recognition that used on National Football Team of Indonesia
+                    match
                   </p>
                 </div>
               </div>

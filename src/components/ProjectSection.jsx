@@ -60,8 +60,8 @@ export const ProjectSection = () => {
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
-              <div className="p-6">
-                <div className="flex flex-wrap gap-2 mb-4">
+              <div className="text-left p-6">
+                <div className="flex flex-wrap gap-2 mb-4 justify-center items-center">
                   {project.tag.map((tag, index) => (
                     <span
                       key={index}

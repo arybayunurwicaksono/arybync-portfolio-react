@@ -1,5 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from '../lib/utils';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const skills = [
   { name: 'Kotlin', level: 85, category: 'mobile' },
@@ -30,7 +34,35 @@ const categories = [
 export const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
-  const filteredSkills = skills.filter((skill) => activeCategory === 'all' || skill.category === activeCategory);
+  const filteredSkills = skills.filter(
+    (skill) => activeCategory === 'all' || skill.category === activeCategory
+  );
+
+  useEffect(() => {
+    // Animate each card
+    gsap.utils.toArray('.skill-card').forEach((card, i) => {
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: i * 0.1, // stagger effect
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, [activeCategory]);
 
   return (
     <section id="skills" className="py-24 px-4 relative bg-secondary/30">
@@ -39,15 +71,16 @@ export const SkillsSection = () => {
           My <span className="text-primary"> Skills</span>
         </h2>
 
+        {/* Category Buttons */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((category, key) => (
             <button
               key={key}
               className={cn(
-                'px-5 py-2 rounded-full transition-colors duration-300 capitalize',
+                'cursor-pointer px-5 py-2 rounded-full transition-colors duration-300 capitalize',
                 activeCategory === category
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-background/70 text-foreground hover:bg-secondary'
+                  : 'bg-background/70 text-foreground hover:bg-secondary hover:bg-primary/70 hover:text-white'
               )}
               onClick={() => setActiveCategory(category)}
             >
@@ -56,18 +89,20 @@ export const SkillsSection = () => {
           ))}
         </div>
 
+        {/* Skills Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredSkills.map((skill, key) => (
             <div
               key={key}
-              className="bg-card p-6 rounded-lg shadow-xs card-hover"
+              className="skill-card bg-card p-6 rounded-lg shadow-xs card-hover"
             >
               <div className="text-left mb-4">
                 <h3 className="font-semibold text-lg">{skill.name}</h3>
               </div>
               <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
                 <div
-                  className="bg-primary h-2 rounded-full origin-left animate-[grow_1.5s_ease-out]"
+                  className="bg-primary h-2 rounded-full origin-left"
+                  data-width={skill.level}
                   style={{ width: skill.level + '%' }}
                 />
               </div>
