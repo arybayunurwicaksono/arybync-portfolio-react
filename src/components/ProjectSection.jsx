@@ -17,21 +17,20 @@ const projects = [
     name: 'FR Access',
     description:
       'Face recognition and ticket scanning system integrated with GarudaID for Indonesia’s National Team matches.',
-    image: '/projects/pine-vpn.png',
+    image: '/projects/fr-access.png',
     tag: ['Kotlin', 'TensorFlow Lite', 'Firebase'],
-    demoUrl: '#',
-    githubUrl: '#',
+    demoUrl: '',
+    githubUrl: '',
   },
   {
     id: 3,
-    name: 'Pine VPN',
+    name: 'Garuda ID Mobile',
     description:
-      'A secure VPN app that protects privacy and offers fast browsing with media compression.',
-    image: '/projects/pine-vpn.png',
-    tag: ['Kotlin', 'MVVM', 'Firebase'],
-    demoUrl:
-      'https://play.google.com/store/apps/details?id=com.pine.vpn&hl=en&gl=US',
-    githubUrl: '#',
+      'Garuda ID is an official digital identity implemented by PSSI (All Indonesia Football Association) for Indonesian National Team supporters.',
+    image: '/projects/garuda-id-mobile.png',
+    tag: ['Flutter', 'Mobx', 'Firebase'],
+    demoUrl: '',
+    githubUrl: '',
   },
 ];
 
@@ -47,6 +46,7 @@ export const ProjectSection = () => {
           Here are some of the projects I've worked on recently. Click on the
           links to view the live demo or the source code on GitHub.
         </p>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, key) => (
             <div
@@ -71,34 +71,42 @@ export const ProjectSection = () => {
                     </span>
                   ))}
                 </div>
+
                 <h3 className="text-xl font-semibold mb-1">{project.name}</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   {project.description}
                 </p>
+
+                {/* 🔧 Show icons only if URL exists */}
                 <div className="flex justify-between items-center">
                   <div className="flex space-x-3">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                    >
-                      <Github size={20} />
-                    </a>
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                      >
+                        <ExternalLink size={20} />
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                      >
+                        <Github size={20} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
         <div className="text-center mt-12">
           <a
             className="cosmic-button w-fit flex items-center mx-auto gap-2"

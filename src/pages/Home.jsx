@@ -12,6 +12,7 @@ import { ThemeToggle } from '../components/ThemeToggle';
 import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { CertificateSection } from '../components/CertificateSection';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -19,13 +20,16 @@ export const Home = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    // enable scroll smoother only once
+    // Enable scroll smoother only once
     const smoother = ScrollSmoother.create({
       wrapper: '#smooth-wrapper',
       content: '#smooth-content',
       smooth: 1.2, // higher = smoother (but more lag)
       effects: true,
     });
+
+    // Simpan smoother di window agar bisa diakses global (misalnya oleh Navbar)
+    window.smoother = smoother;
 
     gsap.utils.toArray('.section').forEach((section) => {
       gsap.fromTo(
@@ -38,7 +42,7 @@ export const Home = () => {
           ease: 'power2.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 80%', // when section top hits 80% viewport height
+            start: 'top 80%',
             end: 'top 30%',
             toggleActions: 'play none none reverse',
           },
@@ -59,14 +63,15 @@ export const Home = () => {
     });
 
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 100);
+      setShowScrollTop(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      smoother.kill(); // cleanup when component unmounts
+      smoother.kill();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      delete window.smoother;
     };
   }, []);
 
@@ -84,23 +89,27 @@ export const Home = () => {
             <StarBackground />
 
             <main>
-              <div className="section home-section">
+              <div className="section home-section" id="home">
                 <HomeSection />
               </div>
 
-              <div className="section about-section">
+              <div className="section about-section" id="about">
                 <AboutSection />
               </div>
 
-              <div className="section skills-section">
+              <div className="section skills-section" id="skills">
                 <SkillsSection />
               </div>
 
-              <div className="section project-section">
+              <div className="section certificate-section" id="certificate">
+                <CertificateSection />
+              </div>
+
+              <div className="section project-section" id="projects">
                 <ProjectSection />
               </div>
 
-              <div className="section contact-section">
+              <div className="section contact-section" id="contact">
                 <ContactSection />
               </div>
             </main>

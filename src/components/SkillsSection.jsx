@@ -39,16 +39,17 @@ export const SkillsSection = () => {
   );
 
   useEffect(() => {
-    // Animate each card
+    const triggers = [];
+
     gsap.utils.toArray('.skill-card').forEach((card, i) => {
-      gsap.fromTo(
+      const anim = gsap.fromTo(
         card,
         { opacity: 0, y: 50 },
         {
           opacity: 1,
           y: 0,
           duration: 0.8,
-          delay: i * 0.1, // stagger effect
+          delay: i * 0.1,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: card,
@@ -57,10 +58,15 @@ export const SkillsSection = () => {
           },
         }
       );
+
+      if (anim.scrollTrigger) {
+        triggers.push(anim.scrollTrigger);
+      }
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      // cleanup only skill triggers
+      triggers.forEach((t) => t.kill());
     };
   }, [activeCategory]);
 
