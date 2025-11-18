@@ -13,6 +13,7 @@ import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CertificateSection } from '../components/CertificateSection';
+import { cn } from '../lib/utils';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -20,17 +21,16 @@ export const Home = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    // Enable scroll smoother only once
     const smoother = ScrollSmoother.create({
       wrapper: '#smooth-wrapper',
       content: '#smooth-content',
-      smooth: 1.2, // higher = smoother (but more lag)
+      smooth: 1.2,
       effects: true,
     });
 
-    // Simpan smoother di window agar bisa diakses global (misalnya oleh Navbar)
     window.smoother = smoother;
 
+    // ANIMASI SECTION — tetap seperti kode kamu
     gsap.utils.toArray('.section').forEach((section) => {
       gsap.fromTo(
         section,
@@ -50,27 +50,16 @@ export const Home = () => {
       );
     });
 
-    // Floating box parallax effect
-    gsap.to('.floating-box', {
-      yPercent: 50,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.skills-section',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
-      },
+    // ⬇️ FAB AUTO HIDE / SHOW (REAL-TIME)
+    const unsubscribe = gsap.ticker.add(() => {
+      const y = smoother ? smoother.scrollTop() : window.scrollY;
+      setShowScrollTop(y > 200);
     });
 
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      gsap.ticker.remove(unsubscribe);
       smoother.kill();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ScrollTrigger.getAll().forEach((t) => t.kill());
       delete window.smoother;
     };
   }, []);
@@ -85,7 +74,6 @@ export const Home = () => {
       >
         <div id="smooth-content">
           <nav className="min-h-screen">
-            <ThemeToggle />
             <StarBackground />
 
             <main>
@@ -115,19 +103,36 @@ export const Home = () => {
             </main>
 
             <Footer />
-
-            <a
-              href="#smooth-wrapper"
-              className={`p-2 fixed bottom-10 right-5 z-10 rounded-full bg-primary/10 hover:bg-primary/20 text-primary 
-              transition-all duration-500 ease-in-out
-              ${showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5 pointer-events-none'}
-            `}
-            >
-              <ArrowUp size={20} />
-            </a>
           </nav>
         </div>
       </div>
+
+      {/* 🌙 THEME TOGGLE FAB */}
+      <ThemeToggle showScrollTop={showScrollTop} />
+
+      {/* ⬆️ SCROLL TO TOP FAB */}
+      <button
+        onClick={() => {
+          if (window.smoother) {
+            window.smoother.scrollTo(0, true);
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+
+          // sembunyikan FAB setelah user klik scroll-to-top
+          setTimeout(() => setShowScrollTop(false), 500);
+        }}
+        className={cn(
+          'p-3 fixed bottom-10 right-6 z-50 rounded-full shadow-lg',
+          'bg-primary text-primary-foreground hover:bg-primary/90',
+          'transition-all duration-300',
+          showScrollTop
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-5 pointer-events-none'
+        )}
+      >
+        <ArrowUp size={20} />
+      </button>
     </>
   );
 };

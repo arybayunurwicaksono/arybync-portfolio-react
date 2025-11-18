@@ -1,4 +1,5 @@
 import { Briefcase, Code, User } from 'lucide-react';
+import { handleMotionClick } from '../lib/utils';
 
 export const AboutSection = () => {
   return (
@@ -36,7 +37,11 @@ export const AboutSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#contact" className="cosmic-button">
+              <a
+                href="#contact"
+                className="cosmic-button"
+                onClick={(e) => handleMotionClick(e, '#contact')}
+              >
                 Get in Touch
               </a>
 

@@ -9,18 +9,29 @@ const skills = [
   { name: 'Kotlin', level: 85, category: 'mobile' },
   { name: 'Java', level: 75, category: 'mobile' },
   { name: 'Dart/Flutter', level: 85, category: 'multi-platform' },
-  { name: 'HTML/CSS', level: 65, category: 'frontend' },
   { name: 'JavaScript', level: 60, category: 'frontend' },
   { name: 'TailwindCSS', level: 50, category: 'frontend' },
   { name: 'React', level: 45, category: 'frontend' },
-
   { name: 'Android Studio', level: 90, category: 'tools' },
   { name: 'Visual Studio Code', level: 85, category: 'tools' },
   { name: 'Git/Github/Gitlab', level: 80, category: 'tools' },
-
-  { name: 'Indonesian', level: 90, category: 'language' },
-  { name: 'English', level: 75, category: 'language' },
 ];
+
+const skillLogos = {
+  Kotlin: '/skills/ic_kotlin.png',
+  Java: '/skills/ic_java.png',
+  'Dart/Flutter': '/skills/ic_flutter.png',
+  JavaScript: '/skills/ic_javascript.png',
+  TailwindCSS: '/skills/ic_tailwind.png',
+  React: '/skills/ic_react.png',
+
+  'Android Studio': '/skills/ic_android_studio.png',
+  'Visual Studio Code': '/skills/ic_visual_studio_code.png',
+  'Git/Github/Gitlab': '/skills/ic_git.png',
+
+  Indonesian: '/skills/flag-id.png',
+  English: '/skills/flag-en.png',
+};
 
 const categories = [
   'all',
@@ -96,26 +107,21 @@ export const SkillsSection = () => {
         </div>
 
         {/* Skills Grid */}
+        {/* Skills Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredSkills.map((skill, key) => (
             <div
               key={key}
               className="skill-card bg-card p-6 rounded-lg shadow-xs card-hover"
             >
-              <div className="text-left mb-4">
-                <h3 className="font-semibold text-lg">{skill.name}</h3>
-              </div>
-              <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
-                <div
-                  className="bg-primary h-2 rounded-full origin-left"
-                  data-width={skill.level}
-                  style={{ width: skill.level + '%' }}
+              {/* Row: Logo + Skill Name */}
+              <div className="flex items-center gap-4 mb-2">
+                <img
+                  src={skillLogos[skill.name]}
+                  alt={skill.name}
+                  className="w-8 h-8 object-contain"
                 />
-              </div>
-              <div className="text-right mt-1">
-                <span className="text-sm text-muted-foreground">
-                  {skill.level}%
-                </span>
+                <h3 className="font-semibold text-lg">{skill.name}</h3>
               </div>
             </div>
           ))}

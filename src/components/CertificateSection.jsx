@@ -9,7 +9,8 @@ const certificates = [
       'This certificate verifies the completion of a career development course focused on guiding learners to build a professional path as a software developer.',
     image: '/certificates/dicoding-meniti-karir-sebagai-software-developer.jpg',
     date: 'July 2022',
-    pdfUrl: '/certificates/flutter-cert.pdf',
+    pdfUrl:
+      'https://drive.google.com/file/d/1FpUyhAO2Odx-KiY1eNkIteREvknB9Kte/view?usp=sharing',
   },
   {
     id: 2,
@@ -19,7 +20,8 @@ const certificates = [
       'Completed intership program from Kecilin ID, by contributing into real developer environtment',
     image: '/certificates/kecilin-id-intership.jpg',
     date: 'October 2023',
-    pdfUrl: '/certificates/kotlin-cert.pdf',
+    pdfUrl:
+      'https://drive.google.com/file/d/19D69AQC23voGZrBKr4qg51ydZmL34CVc/view?usp=sharing',
   },
   {
     id: 3,
@@ -29,17 +31,42 @@ const certificates = [
       'This certificate verifies the completion of an intermediate-level Android development course covering Paging implementation, FCM, and the creation of a Story App project.',
     image: '/certificates/dicoding-android-intermediate.jpg',
     date: 'May 2022',
-    pdfUrl: '/certificates/firebase-cert.pdf',
+    pdfUrl:
+      'https://drive.google.com/file/d/1YCA3DC_KxkkN6l34HWO-RGkvYI2NfDBW/view?usp=sharing',
   },
   {
     id: 4,
-    name: 'Basic UX Design',
+    name: 'Android Fundamental',
     issuer: 'Dicoding',
     description:
-      'This certificate verifies the completion of a beginner-level UX design course covering the fundamentals of user experience, design thinking, empathy mapping, wireframing, prototyping, and usability testing.',
-    image: '/certificates/dicoding-basic-ux-design.jpg',
-    date: 'April 2022',
-    pdfUrl: '/certificates/firebase-cert.pdf',
+      'This certificate verifies the completion of a android fundamental course covering the basics of android development, including activities, intents, layouts, and user input handling.',
+    image: '/certificates/dicoding-android-fundamental.jpg',
+    date: 'March 2022',
+    pdfUrl:
+      'https://drive.google.com/file/d/1gV_wDy42hHft0cqmvuxcIlCAw8xrjdNu/view?usp=sharing',
+  },
+
+  {
+    id: 6,
+    name: 'Internship Completion',
+    issuer: 'Bangkit Academy',
+    description:
+      'This certificate verifies the completion of a Bangkit Academy program specializing in Mobile Development using Kotlin.',
+    image: '/certificates/bangkit-completion.jpg',
+    date: 'July 2022',
+    pdfUrl:
+      'https://drive.google.com/file/d/1m5psJDj15_F5j2x8pa2EAfEepSctgLky/view?usp=sharing',
+  },
+  {
+    id: 6,
+    name: 'SOLID Principles',
+    issuer: 'Dicoding',
+    description:
+      'This certificate verifies the completion of a SOLID principles course covering the five key principles of object-oriented design: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion.',
+    image: '/certificates/dicoding-solid-principle.jpg',
+    date: 'February 2022',
+    pdfUrl:
+      'https://drive.google.com/file/d/1L6iFH4YZ0AMjE48-G61gMbxtUxiLSEgR/view?usp=drive_link',
   },
 ];
 

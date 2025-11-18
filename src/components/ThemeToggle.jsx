@@ -2,7 +2,7 @@ import { Moon, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { cn } from '../lib/utils';
 
-export const ThemeToggle = () => {
+export const ThemeToggle = ({ showScrollTop }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export const ThemeToggle = () => {
       document.documentElement.classList.add('dark');
     } else {
       setIsDarkMode(false);
-      localStorage.setItem('theme', 'light');
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 
@@ -32,15 +32,23 @@ export const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       className={cn(
-        'cursor-pointer fixed map-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300',
-        'focus:outline-hidden hidden md:flex'
+        'cursor-pointer fixed right-6 z-[60] p-3 rounded-full shadow-lg backdrop-blur',
+        'transition-all duration-300 border border-border flex',
+
+        // ✔ Position logic sama seperti sebelumnya
+        !showScrollTop && 'bottom-10',
+        showScrollTop && 'bottom-24',
+
+        // 🌗 ✔ Background menyesuaikan theme
+        isDarkMode
+          ? 'bg-card/90 hover:bg-card' // dark mode
+          : 'bg-zinc-800 hover:bg-zinc-700 text-white' // light mode → gelap
       )}
     >
-      {' '}
       {isDarkMode ? (
-        <Sun className="h-6 w-6 text-yellow-300" />
+        <Sun className="h-5 w-5 text-yellow-400" />
       ) : (
-        <Moon className="h-6 w-6 text-blue-900" />
+        <Moon className="h-5 w-5 text-blue-100" />
       )}
     </button>
   );

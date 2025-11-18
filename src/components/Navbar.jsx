@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { cn } from '../lib/utils';
 import { Menu, X } from 'lucide-react';
+import { handleMotionClick } from '../lib/utils';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -28,31 +29,6 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ✅ handler baru untuk scroll ke section dengan ScrollSmoother
-  const handleNavClick = (e, href) => {
-    e.preventDefault();
-    const target = document.querySelector(href);
-    if (!target) return;
-
-    // jarak atas (gap) agar tidak ketutup navbar
-    const offset = 50;
-
-    if (window.smoother) {
-      // dapatkan posisi target di dalam smoother
-      const targetY = window.smoother.offset(target, 'top', true) - offset;
-
-      // scroll ke posisi dengan jarak atas
-      window.smoother.scrollTo(targetY, true);
-    } else {
-      // fallback tanpa smoother
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-
-    // tutup menu mobile jika sedang terbuka
-    setIsMenuOpen(false);
-  };
-
   return (
     <nav
       className={cn(
@@ -64,7 +40,7 @@ export const Navbar = () => {
         <a
           className="tetxt-xl font-bold text-primary flex items-center cursor-pointer"
           href="#home"
-          onClick={(e) => handleNavClick(e, '#home')}
+          onClick={(e) => handleMotionClick(e, '#home')}
         >
           <span className="relative z-10">
             <span className="text-glow text-foreground"> Arybync </span>{' '}
@@ -78,7 +54,7 @@ export const Navbar = () => {
             <a
               key={key}
               href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
+              onClick={(e) => handleMotionClick(e, item.href)}
               className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-pointer"
             >
               {item.name}
@@ -110,7 +86,7 @@ export const Navbar = () => {
               <a
                 key={key}
                 href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={(e) => handleMotionClick(e, item.href)}
                 className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-pointer"
               >
                 {item.name}
