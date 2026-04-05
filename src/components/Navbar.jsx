@@ -70,48 +70,49 @@ export const Navbar = () => {
         </button>
 
         {/* Mobile overlay — FIXED DI LUAR FLOW SMOOTHER */}
-        {createPortal(
-          <div
-            className={cn(
-              'fixed inset-0 bg-background/95 backdrop-blur-md z-[9999]',
-              'flex flex-col items-center justify-center',
-              'transition-all duration-300 md:hidden',
-              isMenuOpen
-                ? 'opacity-100 pointer-events-auto'
-                : 'opacity-0 pointer-events-none'
-            )}
-          >
-            {/* 🔥 CLOSE BUTTON (pojok kanan atas) */}
-            <button
-              onClick={closeMenu}
-              className="absolute top-6 right-6 p-2 text-foreground hover:text-primary transition"
+        {typeof document !== 'undefined' &&
+          createPortal(
+            <div
+              className={cn(
+                'fixed inset-0 bg-background/95 backdrop-blur-md z-[9999]',
+                'flex flex-col items-center justify-center',
+                'transition-all duration-300 md:hidden',
+                isMenuOpen
+                  ? 'opacity-100 pointer-events-auto'
+                  : 'opacity-0 pointer-events-none'
+              )}
             >
-              <X size={28} />
-            </button>
+              {/* CLOSE BUTTON */}
+              <button
+                onClick={closeMenu}
+                className="absolute top-6 right-6 p-2 text-foreground hover:text-primary transition"
+              >
+                <X size={28} />
+              </button>
 
-            {/* MENU */}
-            <div className="flex flex-col space-y-8 text-xl">
-              {navItems.map((item, key) => (
-                <a
-                  key={key}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault(); // penting!
-                    closeMenu();
+              {/* MENU */}
+              <div className="flex flex-col space-y-8 text-xl">
+                {navItems.map((item, key) => (
+                  <a
+                    key={key}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      closeMenu();
 
-                    setTimeout(() => {
-                      handleMotionClick(e, item.href);
-                    }, 150); // kasih delay biar animasi close jalan dulu
-                  }}
-                  className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-pointer text-center"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </div>,
-          document.getElementById('portal-root')
-        )}
+                      setTimeout(() => {
+                        handleMotionClick(e, item.href);
+                      }, 150);
+                    }}
+                    className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-pointer text-center"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+            </div>,
+            document.getElementById('portal-root')
+          )}
       </div>
     </nav>
   );
