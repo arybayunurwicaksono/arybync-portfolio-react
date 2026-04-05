@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { cn } from '../lib/utils';
 import { Menu, X } from 'lucide-react';
 import { handleMotionClick } from '../lib/utils';
+import { createPortal } from 'react-dom';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -16,13 +17,11 @@ export const Navbar = () => {
   const [isScrolled, setisScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const closeMenu = () => setIsMenuOpen(false);
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setisScrolled(true);
-      } else {
-        setisScrolled(false);
-      }
+      setisScrolled(window.scrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -48,7 +47,7 @@ export const Navbar = () => {
           </span>
         </a>
 
-        {/* Desktop menu */}
+        {/* Desktop */}
         <div className="hidden md:flex space-x-8">
           {navItems.map((item, key) => (
             <a
@@ -62,38 +61,57 @@ export const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile button */}
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
           className="md:hidden p-2 text-foreground z-50"
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />} {''}
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {/* Mobile menu overlay */}
-        <div
-          className={cn(
-            'fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center',
-            'transition-all duration-300 md:hidden',
-            isMenuOpen
-              ? 'opacity-100 pointer-events-auto'
-              : 'opacity-0 pointer-events-none'
-          )}
-        >
-          <div className="flex flex-col space-y-8 text-xl">
-            {navItems.map((item, key) => (
-              <a
-                key={key}
-                href={item.href}
-                onClick={(e) => handleMotionClick(e, item.href)}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-pointer"
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
-        </div>
+        {/* Mobile overlay — FIXED DI LUAR FLOW SMOOTHER */}
+        {createPortal(
+          <div
+            className={cn(
+              'fixed inset-0 bg-background/95 backdrop-blur-md z-[9999]',
+              'flex flex-col items-center justify-center',
+              'transition-all duration-300 md:hidden',
+              isMenuOpen
+                ? 'opacity-100 pointer-events-auto'
+                : 'opacity-0 pointer-events-none'
+            )}
+          >
+            {/* 🔥 CLOSE BUTTON (pojok kanan atas) */}
+            <button
+              onClick={closeMenu}
+              className="absolute top-6 right-6 p-2 text-foreground hover:text-primary transition"
+            >
+              <X size={28} />
+            </button>
+
+            {/* MENU */}
+            <div className="flex flex-col space-y-8 text-xl">
+              {navItems.map((item, key) => (
+                <a
+                  key={key}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault(); // penting!
+                    closeMenu();
+
+                    setTimeout(() => {
+                      handleMotionClick(e, item.href);
+                    }, 150); // kasih delay biar animasi close jalan dulu
+                  }}
+                  className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-pointer text-center"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          </div>,
+          document.getElementById('portal-root')
+        )}
       </div>
     </nav>
   );

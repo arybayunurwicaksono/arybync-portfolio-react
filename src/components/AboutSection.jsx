@@ -91,12 +91,14 @@ export const AboutSection = () => {
                   <Briefcase className="h-6 w-6 text-primary" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg">Where i work?</h4>
+                  <h4 className="font-semibold text-lg">
+                    Where I Last Worked?
+                  </h4>
                   <p className="text-muted-foreground">
-                    I am currently working at AssistX Enterprise as a Mobile
-                    Developer, where I contribute to develop Pine VPN to Face
-                    Recognition that used on National Football Team of Indonesia
-                    match
+                    I last worked at AssistX Enterprise as a Mobile Developer,
+                    contributing to the development of mobile solutions
+                    including VPN services and face recognition systems utilized
+                    during Indonesia National Football Team matches.
                   </p>
                 </div>
               </div>

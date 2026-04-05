@@ -14,11 +14,13 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CertificateSection } from '../components/CertificateSection';
 import { cn } from '../lib/utils';
+import { createPortal } from 'react-dom';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export const Home = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const smoother = ScrollSmoother.create({
