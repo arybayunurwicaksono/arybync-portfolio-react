@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const skills = [
   { name: 'Kotlin', level: 85, category: 'mobile' },
+  { name: 'Jetpack Compose', level: 80, category: 'mobile' },
   { name: 'Java', level: 75, category: 'mobile' },
   { name: 'Dart/Flutter', level: 85, category: 'multi-platform' },
   { name: 'JavaScript', level: 60, category: 'frontend' },
@@ -15,10 +16,13 @@ const skills = [
   { name: 'Android Studio', level: 90, category: 'tools' },
   { name: 'Visual Studio Code', level: 85, category: 'tools' },
   { name: 'Git/Github/Gitlab', level: 80, category: 'tools' },
+  { name: 'Indonesian', level: 100, category: 'language' },
+  { name: 'English', level: 70, category: 'language' },
 ];
 
 const skillLogos = {
   Kotlin: '/skills/ic_kotlin.png',
+  'Jetpack Compose': '/skills/ic_jetpack_compose.png',
   Java: '/skills/ic_java.png',
   'Dart/Flutter': '/skills/ic_flutter.png',
   JavaScript: '/skills/ic_javascript.png',

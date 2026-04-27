@@ -17,7 +17,7 @@ export const AboutSection = () => {
               tech
             </h3>
             <p className="text-muted-foreground">
-              Based in Yogyakarta with hands-on experience in Kotlin and Flutter
+              Based in Bandung with hands-on experience in Kotlin and Flutter
               and right now i'm exploring new way, which is React that help me
               build this portfolio.
             </p>
@@ -64,7 +64,7 @@ export const AboutSection = () => {
                   <h4 className="font-semibold text-lg">Mobile Developer</h4>
                   <p className="text-muted-foreground">
                     Building responsive and user-friendly mobile applications
-                    using Kotlin, Java and using flutter too, recently, React
+                    using Kotlin or Jetpack Compose, Java and using flutter too, recently, React
                     Native
                   </p>
                 </div>
@@ -92,13 +92,13 @@ export const AboutSection = () => {
                 </div>
                 <div className="text-left">
                   <h4 className="font-semibold text-lg">
-                    Where I Last Worked?
+                    Where I Worked?
                   </h4>
                   <p className="text-muted-foreground">
-                    I last worked at AssistX Enterprise as a Mobile Developer,
+                    I worked at Azuba Tech as a Mobile Developer,
                     contributing to the development of mobile solutions
-                    including VPN services and face recognition systems utilized
-                    during Indonesia National Football Team matches.
+                    including Face Recognition systems utilized in National 
+                    Indonesia's Intelligent
                   </p>
                 </div>
               </div>
