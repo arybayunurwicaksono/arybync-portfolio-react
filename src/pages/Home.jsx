@@ -13,6 +13,7 @@ import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CertificateSection } from '../components/CertificateSection';
+import { GallerySection } from '../components/GallerySection';
 import { cn } from '../lib/utils';
 import { createPortal } from 'react-dom';
 
@@ -97,6 +98,10 @@ export const Home = () => {
 
               <div className="section project-section" id="projects">
                 <ProjectSection />
+              </div>
+
+              <div className="section gallery-section" id="gallery">
+                <GallerySection />
               </div>
 
               <div className="section contact-section" id="contact">
